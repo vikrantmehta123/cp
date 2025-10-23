@@ -9,14 +9,14 @@
 | Operation        | Complexity     | Notes                                                                  								|
 | ---------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------|
 | Access `v[i]`    | O(1)           | Random access is constant time.                                        								|
-| `push_back(x)`   | Amortized O(1) | Occasionally O(n) when resizing happens. `push_back` creates the object outside of the vector and then copies it in the vector.   |
+| `push_back(x)`   | Amortized O(1) | O(n) when resizing. `push_back` creates the object outside of the vector and then copies it in the vector.   |
 | `pop_back()`     | O(1)           | Removes last element.                                                  								|
 | `insert(pos, x)` | O(n)           | Elements after `pos` are shifted.                                      								|
 | `erase(pos)`     | O(n)           | Elements after `pos` are shifted.                                      								|
 | `size()`         | O(1)           | Returns number of elements.                                            								|
 | `empty()`        | O(1)           | Checks if vector is empty.                                             								|
 | `clear()`        | O(n)           | Destroys all elements.                                                 								|
-| `emplave_back(x)`| Amortized O(1) | `emplace_back` creates the object itself in the vector and thus no copying is required. 						| 
+| `emplace_back(x)`| Amortized O(1) | `emplace_back` creates the object itself in the vector and thus no copying is required. 				| 
 
 ---
 
@@ -30,7 +30,7 @@
 
 ### 4. Multiset
 
-- Implemented as Red-Black tree. 
+- Implemented as Red-Black tree. So they take logn complexity in the worst case, as opposed to hash-bashed methods which take O(1) on average but O(n) in worst case.
 - Sets don't allow duplicates. Multisets do.
 
 - **Methods**
