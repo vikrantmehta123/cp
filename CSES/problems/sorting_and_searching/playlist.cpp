@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <map> // Changed from <unordered_map> to <map>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 /**
  * @brief Solves the CSES Playlist problem (Longest Subarray with Distinct Elements).
