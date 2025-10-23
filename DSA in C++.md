@@ -28,3 +28,21 @@
 
 - Map is a key-value pair, Set is just keys.
 
+### 4. Multiset
+
+- Implemented as Red-Black tree. 
+- Sets don't allow duplicates. Multisets do.
+
+- **Methods**
+| Method             | Complexity          | Notes                                                               |
+| ------------------ | ------------------- | ------------------------------------------------------------------- |
+| `insert(x)`        | O(log n)            | Inserts element (duplicates allowed); maintains sorted order.       |
+| `erase(x)`         | O(log n + count(x)) | Removes **all** occurrences of value `x`.                           |
+| `erase(it)`        | O(log n)            | Removes the element pointed by iterator `it`.                       |
+| `find(x)`          | O(log n)            | Returns iterator to one occurrence of `x`, or `end()` if not found. |
+| `count(x)`         | O(log n + k)        | Counts how many times `x` appears (`k` = duplicates).               |
+| `lower_bound(x)`   | O(log n)            | Iterator to **first element ≥ x**.                                  |
+| `upper_bound(x)`   | O(log n)            | Iterator to **first element > x**.                                  |
+| `begin()`, `end()` | O(1)                | Iterators to smallest and past-largest elements.                    |
+| `size()`           | O(1)                | Number of elements (including duplicates).                          |
+| `empty()`          | O(1)                | Checks if multiset is empty.                                        |
