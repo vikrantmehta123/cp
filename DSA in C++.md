@@ -24,9 +24,28 @@
 
 - Map is a key-value pair, Set is just keys.
 
-### 3. Map, Set
+### 3. Map
 
-- Map is a key-value pair, Set is just keys.
+- Map is a key-value pair which is again implemented as a Red-Black tree. Hence the worst-case performance is Log(n)
+
+| Operation / Method | Complexity | Description |
+|--------------------|-------------|--------------|
+| `m.insert({key, value})` | O(log n) | Inserts a key-value pair. Does nothing if the key already exists. |
+| `m[key]` | O(log n) | Accesses or inserts the element with the given key (creates a default value if key doesn’t exist). |
+| `m.at(key)` | O(log n) | Accesses the element with the given key. Throws `out_of_range` if key not found. |
+| `m.find(key)` | O(log n) | Returns an iterator to the key if found, otherwise `m.end()`. |
+| `m.count(key)` | O(log n) | Returns 1 if the key exists, else 0 (since keys are unique). |
+| `m.erase(key)` | O(log n) | Removes the element with the specified key. |
+| `m.erase(iterator)` | O(log n) | Removes the element at the given iterator. |
+| `m.size()` | O(1) | Returns the number of elements in the map. |
+| `m.empty()` | O(1) | Returns true if the map is empty. |
+| `m.clear()` | O(n) | Removes all elements from the map. |
+| `m.begin()` / `m.end()` | O(1) | Returns iterator to the first / past-the-end element (sorted order). |
+| `m.lower_bound(key)` | O(log n) | Returns iterator to the first element **not less than** the given key. |
+| `m.upper_bound(key)` | O(log n) | Returns iterator to the first element **greater than** the given key. |
+| `m.equal_range(key)` | O(log n) | Returns a pair of iterators: `{lower_bound(key), upper_bound(key)}`. |
+| `m.emplace(key, value)` | O(log n) | Constructs element in place (faster than insert, avoids copy). |
+| `m.swap(other)` | O(1) | Swaps contents with another map. |
 
 ### 4. Multiset
 
