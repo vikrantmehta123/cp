@@ -7,32 +7,28 @@ int main() {
 
     int n;
     cin >> n;
-    
-    vector<bool> seen(n);
-    int count = 0;
-    int idx = 0;
 
-    bool isSecond = false;
-    while (true)
+    set<int> nums;
+
+    for(int i = 1; i <= n; i++){
+        nums.insert(i);
+    }
+    
+    bool skip = false;
+
+    while (!nums.empty())
     {
-        if ( count == n){
-            break;
-        }
-        for(int i = idx; i < n; i++){
-            if(seen[i]){
-                continue;
+        vector<int> to_remove; 
+
+        for (auto it = nums.begin(); it != nums.end(); ++it) {
+            if (skip) {
+                cout << *it << " ";
+                to_remove.push_back(*it);
             }
-            else{
-                if (isSecond){
-                    cout << i + 1 << " ";
-                    count += 1;
-                    seen[i] = true;
-                    isSecond = false;
-                }
-                else{
-                    isSecond = true;
-                }
-            }
+            skip = !skip;
         }
-    }   
+
+        for (int x : to_remove)
+            nums.erase(x);
+    }
 }
