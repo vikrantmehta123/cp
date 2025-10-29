@@ -1,5 +1,37 @@
 # DSA in C++
 
+## Miscellaneous
+
+### Efficient Looping
+
+If you use the loop as follows, `x` is a copy. Making this copy causes additional overhead. 
+
+```cpp
+for (auto x : arr) {
+    x *= 2;
+}
+```
+
+Very often, when doing CP a better ways would be to use a loop as:
+```cpp
+for(int i=0; i < n; i++){
+    int x = arr[i];
+    x *= 2;
+}
+```
+
+Or:
+
+```cpp
+for (auto& x : arr) {
+    x *= 2;
+}
+```
+
+## Algorithms in C++
+
+
+
 ## Data Structures in C++
 
 ### 1. Vectors
