@@ -97,3 +97,9 @@ for (auto& x : arr) {
 | `begin()`, `end()` | O(1)                | Iterators to smallest and past-largest elements.                    |
 | `size()`           | O(1)                | Number of elements (including duplicates).                          |
 | `empty()`          | O(1)                | Checks if multiset is empty.                                        |
+
+### 5. Priority Queue
+
+It's python Heapq equivalent. By default, it implements a max-heap ( whereas in Python it is min-heap by default ). You can convert a max-heap into a min-heap as follows: `priority_queue<int, vector<int>, greater<int>> pq;`. The syntax is: `priority_queue<Type, Container, Comparator>`. 
+
+You can do the regular operations of: `.push(num)`, `.pop()`, `.top()`.

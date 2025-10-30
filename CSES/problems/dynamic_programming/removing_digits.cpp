@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void makeHeap(priority_queue<int>& maxHeap, int num){
-    while(num > 0){
-        int digit = num % 10;
-        num /= 10;
-        maxHeap.push(digit);
+int maxDigit(int n) {
+    int mx = 0;
+    while (n) {
+        mx = max(mx, n % 10);
+        n /= 10;
     }
+    return mx;
 }
 
 int main() {
@@ -18,9 +19,7 @@ int main() {
 
     int ans = 0 ;
     while(n > 0){
-        priority_queue<int> maxHeap; 
-        makeHeap(maxHeap, n);
-        n -= maxHeap.top();
+        n -= maxDigit(n);
         ans += 1;
     }
 
