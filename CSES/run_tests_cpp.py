@@ -2,7 +2,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-def run_cpp_tests(dirname: str, problem_name: str):
+def run_cpp_tests(dirname: str, problem_name: str, test_number: str = None):
     problem_file = Path(f"problems/{dirname}/{problem_name}.cpp")
     test_dir = Path(f"tests/{dirname}/{problem_name}")
 
@@ -18,7 +18,19 @@ def run_cpp_tests(dirname: str, problem_name: str):
         print(f"⚠️ No input files found in {test_dir}")
         return
 
-    print(f"🔍 Running C++ tests for: {problem_name}\n")
+    # If a specific test number is given, filter files
+    if test_number:
+        target = test_dir / f"{test_number}.in"
+        if not target.exists():
+            print(f"❌ Test case {test_number}.in not found in {test_dir}")
+            return
+        input_files = [target]
+
+    print(f"🔍 Running C++ tests for: {problem_name}")
+    if test_number:
+        print(f"   ▶️ Only test case: {test_number}.in\n")
+    else:
+        print()
 
     # Step 1: Compile
     binary_file = problem_file.with_suffix("")  # e.g., problems/foo/bar
@@ -76,7 +88,10 @@ def run_cpp_tests(dirname: str, problem_name: str):
         binary_file.unlink()
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 run_cpp_tests.py <dirname> <problem_name>")
+    if len(sys.argv) < 3 or len(sys.argv) > 4:
+        print("Usage: python3 run_cpp_tests.py <dirname> <problem_name> [test_number]")
     else:
-        run_cpp_tests(sys.argv[1], sys.argv[2])
+        dirname = sys.argv[1]
+        problem_name = sys.argv[2]
+        test_number = sys.argv[3] if len(sys.argv) == 4 else None
+        run_cpp_tests(dirname, problem_name, test_number)
