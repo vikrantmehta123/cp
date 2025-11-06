@@ -30,7 +30,52 @@ for (auto& x : arr) {
 
 ## Algorithms in C++
 
+### BFS
 
+```cpp
+queue<int> q;
+vector<bool> visited(graph.size(), false);
+
+visited[start] = true;
+q.push(start);
+
+while(!q.empty()) {
+    int node = q.front();
+    q.pop();
+
+    for(int neigh : graph[node]) {
+        if(!visited[neigh]) {
+            visited[neigh] = true;
+            q.push(neigh);
+        }
+    }
+}
+```
+
+### DFS
+
+```cpp
+stack<int> st;
+vector<bool> visited(graph.size(), false);
+
+st.push(start);
+
+while(!st.empty()) {
+    int node = st.top();
+    st.pop();
+
+    if(visited[node]) continue;
+    visited[node] = true;
+
+    // Push neighbors in reverse to maintain natural left-to-right order
+    for(int i = graph[node].size() - 1; i >= 0; i--) {
+        int neigh = graph[node][i];
+        if(!visited[neigh]) {
+            st.push(neigh);
+        }
+    }
+}
+```
 
 ## Data Structures in C++
 
