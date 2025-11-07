@@ -79,6 +79,8 @@ while(!st.empty()) {
 
 ### Dijkstra
 
+- Single source shortest path algorithm
+
 ```cpp
 vector<long long> dijkstra(int n, int src, vector<vector<pair<int,int>>> &adj) {
     const long long INF = 1e18;
@@ -106,6 +108,42 @@ vector<long long> dijkstra(int n, int src, vector<vector<pair<int,int>>> &adj) {
     }
     return dist;
 }
+```
+
+### Floyd-Warshall Algorithm
+
+- All pairs shortest path algorithm
+
+```cpp
+    vector<vector<long long>> dist(n + 1, vector<long long>(n + 1, INF)); // Distance matrix init to infinity
+    for (int i = 1; i <= n; i++) {
+        dist[i][i] = 0;
+    }
+
+    // Read edges (undirected)
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        long long c;
+        cin >> a >> b >> c; // (source, dest, weight)
+
+        dist[a][b] = min(dist[a][b], c);
+        dist[b][a] = min(dist[b][a], c);
+    }
+
+    // Floyd–Warshall: O(n^3)
+    for (int k = 1; k <= n; k++) {
+        for (int i = 1; i <= n; i++) {
+            // Small optimization: skip impossible i->k
+            if (dist[i][k] == INF) continue;
+            for (int j = 1; j <= n; j++) {
+                if (dist[k][j] == INF) continue;
+                long long through = dist[i][k] + dist[k][j];
+                if (through < dist[i][j]) {
+                    dist[i][j] = through;
+                }
+            }
+        }
+    }
 ```
 
 
