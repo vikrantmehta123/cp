@@ -146,6 +146,50 @@ vector<long long> dijkstra(int n, int src, vector<vector<pair<int,int>>> &adj) {
     }
 ```
 
+### Topological Sort
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> topologicalSort(int n, vector<vector<int>>& adj) {
+    vector<int> indegree(n, 0);
+
+    // Compute indegree
+    for (int u = 0; u < n; u++) {
+        for (int v : adj[u]) {
+            indegree[v]++;
+        }
+    }
+
+    queue<int> q;
+    for (int i = 0; i < n; i++) {
+        if (indegree[i] == 0) q.push(i);
+    }
+
+    vector<int> order;
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        order.push_back(u);
+
+        for (int v : adj[u]) {
+            indegree[v]--;
+            if (indegree[v] == 0) {
+                q.push(v);
+            }
+        }
+    }
+
+    // Detect cycle: if not all nodes are processed
+    if (order.size() != n) {
+        throw runtime_error("topological sort impossible.");
+    }
+
+    return order;
+}
+```
+
 
 ## Data Structures in C++
 
