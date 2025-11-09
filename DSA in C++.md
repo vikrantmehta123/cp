@@ -54,6 +54,8 @@ while(!q.empty()) {
 
 ### DFS
 
+-  There are multiple implementations of DFS. Avoid recursive implementation as it can lead to stack overflows. In iterative implementation as well, there is color-based implementation and a regular implementation. The color-based one is most efficient for finding cycles.
+
 ```cpp
 stack<int> st;
 vector<bool> visited(graph.size(), false);
