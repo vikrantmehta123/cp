@@ -264,3 +264,68 @@ vector<int> topologicalSort(int n, vector<vector<int>>& adj) {
 It's python Heapq equivalent. By default, it implements a max-heap ( whereas in Python it is min-heap by default ). You can convert a max-heap into a min-heap as follows: `priority_queue<int, vector<int>, greater<int>> pq;`. The syntax is: `priority_queue<Type, Container, Comparator>`. 
 
 You can do the regular operations of: `.push(num)`, `.pop()`, `.top()`.
+
+
+
+## Number Theory
+
+### Sieve of Eratosthenes
+
+```cpp
+ll L = 1e8 + 1;
+vector<bool> sieve;
+
+
+void buildSieve(){
+    sieve[0] = false;
+    sieve[1] = false;  
+
+    for (int p = 2; p * p <= L; p++) {
+        if (sieve[p]) {
+            // Mark multiples of p starting from p*p
+            for (long long multiple = 1LL * p * p; multiple <= L; multiple += p) {
+                sieve[multiple] = false;
+            }
+        }
+    }
+}
+
+int main(){
+    sieve.assign(L, true);
+    buildSieve();
+    vector<ll> primes;
+    for(int i=0; i < sieve.size(); i++){
+        if (sieve[i]){
+            primes.push_back(i);
+        }
+    }
+}
+
+vector<long long> factorize(long long n, const vector<int>& primes) {
+    vector<long long> factors;
+
+    for (int p : primes) {
+        if (1LL * p * p > n) break;     // stop once p > sqrt(n)
+
+        while (n % p == 0) {
+            factors.push_back(p);
+            n /= p;
+        }
+    }
+    if (n > 1) factors.push_back(n);     // remaining part is prime
+    return factors;
+}
+```
+
+### 2-Adic Decomposition or Fundamental Decomposition
+
+Every positive integer can be written as: 
+    $n = 2^k + m $
+
+Where, `n` is a positive integer, $k \ge 0 $, and `m` is an odd number. 
+
+The interpretation of this result is:
+
+After removing all factors of 2:
+    - If the remaining value m > 1, then m is an odd divisor > 1 of the original number.
+    - If the remaining value m = 1, then the original number was a pure power of 2 (like 2, 4, 8, 16, ...), meaning it has no odd divisors > 1.
