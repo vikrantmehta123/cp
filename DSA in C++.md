@@ -271,6 +271,8 @@ You can do the regular operations of: `.push(num)`, `.pop()`, `.top()`.
 
 ### Sieve of Eratosthenes
 
+- Preprocessing algorithm that computes the prime numbers up to a certain limit L.
+
 ```cpp
 ll L = 1e8 + 1;
 vector<bool> sieve;
@@ -329,3 +331,64 @@ The interpretation of this result is:
 After removing all factors of 2:
     - If the remaining value m > 1, then m is an odd divisor > 1 of the original number.
     - If the remaining value m = 1, then the original number was a pure power of 2 (like 2, 4, 8, 16, ...), meaning it has no odd divisors > 1.
+
+### Prime Factorization Properties
+
+We can use the sieve of eratosthenes to get the prime factors. But assuming that we have the prime factors and how many times it comes, we can arrive at some very interesting conclusions.
+
+1. The number of factors of a number n the product of (powers + 1). For example, for the number 84, the prime factorization is as follows: $2^2 \cdot 3^1 \cdot 7^1 $. Then the total number of factors of 84 is: $ 3 \cdot 2 \cdot 2 = 12 $
+
+2. There also exists a formula to arrive at the sum of factors and product of factors, but you can look it up later.
+
+3. A number n is called a perfect number if n equals the sum of its factors between 1 and n−1. For example, 28 is a perfect number, because 28 = 1+2+4+7+14.
+
+4. Let us we have a set of primes: ${P_1, P_2, ..., P_n}$. We can construct the next prime as: $P_1 \cdot P_2 ... \cdot P_n + 1$
+
+5. If a number n is not prime, it can be represented as a product $a \cdot b$, where $a\le \sqrt{n}$ or $b\le \sqrt{n}$, so it certainly has a factor between 2 and $\lfloor{\sqrt{n}\rfloor}$.
+
+### Euclid's Algorithm
+
+- Efficient algorithm to compute the GCD.
+```cpp
+int gcd(int a, int b) {
+if (b == 0) return a;
+return gcd(b, a%b);
+}
+```
+
+- You can use this for LCM as well, since LCM and GCD are related as follows:$lcm(a, b) = \dfrac{ab}{gcd(a,b)}$
+- Two numbers are said to be coprimes if their GCD = 1. 
+- Euler's Totient function gives a algorithm to compute the number of coprimes between 1 to n.
+
+
+### Modular Arithmetic
+
+Think about what modular arithmetic means: we want to limit the set of numbers to ${1, 2, ... m-1}$. How do we ensure this to happen if we have a bunch of computations to do? For example, let's say you want to take products or exponentiate. Then how do you ensure that the number never exceeds the modulo, even while computing?!
+
+- $(x+ y) \mod m = (x \mod m+ y \mod m) \mod m$
+- $(x− y) \mod m = (x \mod m− y \mod m) \mod m$
+- $(x · y) \mod m = (x \mod m· y \mod m) \mod m$
+- $x^n \mod m = (x \mod m)^n \mod m$
+
+Often we need to compute: $x^n \mod m$. We can do this in logn time using recursion.
+
+```cpp
+int modpow(int x, int n, int m) {
+    if (n == 0) return 1%m;
+    long long u = modpow(x,n/2,m);
+    u = (u*u)%m;
+    if (n%2 == 1) u = (u*x)%m;
+    return u;
+}
+```
+
+- Fermat's theorem and Euler's theorems are there to give some additional properties when x and m are coprimes in $x^m$. Fermat's Theorem: $x^{m-1} \mod m = 1$, when x and m are coprimes.
+
+### Some Theorems:
+
+- Lagrange's Theorem: Every positive integer can be represented as the sum of four squares: $a^2 + b^2 + c^2 + d^2$.
+- Zeckendorf's Theorem: every positive integer has a unique representation as a sum of Fibonacci numbers such that no two numbers are equal or
+consecutive Fibonacci numbers.
+
+
+## Combinatorics
