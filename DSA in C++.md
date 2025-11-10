@@ -346,6 +346,12 @@ We can use the sieve of eratosthenes to get the prime factors. But assuming that
 
 5. If a number n is not prime, it can be represented as a product $a \cdot b$, where $a\le \sqrt{n}$ or $b\le \sqrt{n}$, so it certainly has a factor between 2 and $\lfloor{\sqrt{n}\rfloor}$.
 
+### Diophantine Equations
+
+A Diophantine equation is of the form: $ax + by = c$, where $x$ and $y$ need to be found and the values of $a, b, c$ are known. We can use Euclid's GCD algorithm to solve this.
+
+A Diophantine equation can be solved if c is divisible by gcd(a,b), and otherwise it cannot be solved. A solution to a Diophantine equation is not unique. For example, solve: $15x + 21y = 6$. The GCD is: gcd(15, 21) = 3. Here, c is divisible by 3, hence there are solutions to this. Arriving at a solution using this is slightly involved and I didn't understand it fully. But this could come in handy.
+
 ### Euclid's Algorithm
 
 - Efficient algorithm to compute the GCD.
