@@ -357,14 +357,17 @@ A Diophantine equation can be solved if c is divisible by gcd(a,b), and otherwis
 - Efficient algorithm to compute the GCD.
 ```cpp
 int gcd(int a, int b) {
-if (b == 0) return a;
-return gcd(b, a%b);
+    if (b == 0) return a;
+    return gcd(b, a%b);
 }
 ```
 
 - You can use this for LCM as well, since LCM and GCD are related as follows:$lcm(a, b) = \dfrac{ab}{gcd(a,b)}$
 - Two numbers are said to be coprimes if their GCD = 1. 
 - Euler's Totient function gives a algorithm to compute the number of coprimes between 1 to n.
+- GCD of consecutive integers is 1.
+- If n is divisible by a, b, c => then n is divisible by LCM of a, b, c; as well as the GCD.
+- gcd(gcd(a, b), c) = gcd(a, gcd(b, c))
 
 
 ### Modular Arithmetic
@@ -390,6 +393,59 @@ int modpow(int x, int n, int m) {
 
 - Fermat's theorem and Euler's theorems are there to give some additional properties when x and m are coprimes in $x^m$. Fermat's Theorem: $x^{m-1} \mod m = 1$, when x and m are coprimes.
 
+Here’s a **compact Markdown + LaTeX list** of the essential congruence properties:
+
+### **Congruence Properties**
+
+1. **Definition**
+   $
+   a \equiv b \pmod{k} \iff k \mid (a-b)
+   $
+
+2. **Remainder Equality**
+   $
+   a \equiv b \pmod{k} \iff a \bmod k = b \bmod k
+   $
+
+3. **Addition / Subtraction**
+   $
+   \begin{aligned}
+   a \equiv b \pmod{k} &\implies a+c \equiv b+c \pmod{k} \
+   &\implies a-c \equiv b-c \pmod{k}
+   \end{aligned}
+   $
+
+4. **Multiplication**
+   $
+   a \equiv b \pmod{k} \implies ac \equiv bc \pmod{k}
+   $
+
+5. **Powers**
+   $
+   a \equiv b \pmod{k} \implies a^n \equiv b^n \pmod{k}
+   $
+
+6. **Transitivity**
+   $
+   (a \equiv b \pmod{k},; b \equiv c \pmod{k}) \implies a \equiv c \pmod{k}
+   $
+
+7. **Division (only when allowed)**
+   $
+   ac \equiv bc \pmod{k},\ \gcd(c,k)=1 \implies a \equiv b \pmod{k}
+   $
+
+8. **Difference Rule**
+   $
+   a \equiv b \pmod{k} \iff a-b \equiv 0 \pmod{k}
+   $
+
+9. **Negatives**
+   $
+   a \equiv b \pmod{k} \iff -a \equiv -b \pmod{k}
+   $
+
+
 ### Some Theorems:
 
 - Lagrange's Theorem: Every positive integer can be represented as the sum of four squares: $a^2 + b^2 + c^2 + d^2$.
@@ -397,4 +453,44 @@ int modpow(int x, int n, int m) {
 consecutive Fibonacci numbers.
 
 
-## Combinatorics
+## Bit Manipulation
+
+
+### AND
+
+- We can check if a number x is even because $x \& 1 = 0$ if x is even, and $x \& 1 = 1$ if x is odd. More generally, x is divisible by $2^k$ exactly when $x \& (2^k −1) = 0$.
+
+### OR
+
+- The **or** operation `x | y` produces a number that has one bits in positions where at least one of x and y have one bits.
+
+### XOR
+
+- The xor operation `x ^ y` produces a number that has one bits in positions where exactly one of x and y have one bits.
+
+### NOT
+
+The not operation $\sim x$ produces a number where all the bits of x have been inverted. The formula $\sim x = −x−1$ holds, for example, $\sim 29 = −30$.
+
+### Bit Shifts
+
+The left bit shift $x << k$ appends k zero bits to the number, and the right bit shift x >> k removes the k last bits from the number. For example, 14 << 2 = 56, because 14 and 56 correspond to 1110 and 111000. Similarly, 49 >> 3 = 6, because 49 and 6 correspond to 110001 and 110. $x << k$ corresponds to multiplying x by $2^k$ , and x >> k corresponds to dividing x by $2^k$ rounded down to an integer.
+
+You can set / manipulate bits based using bit shifts and the bitwise operations. For example, the formula x | (1 << k) sets the kth bit of x to one, the formula x & ~(1 << k) sets the kth bit of x to zero, and the formula x ^ (1 << k) inverts the kth bit of x.
+
+- __builtin_clz(x): the number of zeros at the beginning of the number
+- __builtin_ctz(x): the number of zeros at the end of the number
+- __builtin_popcount(x): the number of ones in the number
+- __builtin_parity(x): the parity (even or odd) of the number of ones. 1 is odd. 0 is even.
+
+- We can use bit shifts and the bitwise operators to efficiently perform set operations of intersection, union, complement and difference.
+- Every subset of a set {0,1,2,...,n−1} can be represented as an n bit integer whose one bits indicate which elements belong to the subset.
+
+The actual running time is much lower when we use bit operations (while the complexity remains the same) because bitwise operators are much faster. For example, Hamming distances:
+```cpp
+int hamming(int a, int b) {
+    return __builtin_popcount(a^b);
+}
+```
+
+This could work if `a` is a 32 bit number.
