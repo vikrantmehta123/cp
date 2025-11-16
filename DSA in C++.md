@@ -445,6 +445,12 @@ Here’s a **compact Markdown + LaTeX list** of the essential congruence propert
    a \equiv b \pmod{k} \iff -a \equiv -b \pmod{k}
    $
 
+### AM-GM Inequality
+
+For positive integers:
+$$\frac{a_1 + a_2 + \cdot \cdot \cdot + a_k}{k} \ge \sqrt[k]{a_1 \cdot a_2 \cdot \cdot \cdot a_k}$$
+
+This is to say that the arithmetic mean is always greater than or equal to the geometric mean. They are only equal when all the numbers $a_i$ are the same.
 
 ### Some Theorems:
 
