@@ -2,3 +2,4 @@
 *.vscode/
 CSES/tests/*
 Codeforces/tests/*
+Leetcode/tests/*
