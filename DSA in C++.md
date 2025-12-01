@@ -473,6 +473,8 @@ consecutive Fibonacci numbers.
 ### XOR
 
 - The xor operation `x ^ y` produces a number that has one bits in positions where exactly one of x and y have one bits.
+- $a \oplus a = 0$. This implies: if an array has duplicate numbers, their xor will cancel out. Also used for sliding window.
+- $a \oplus 0 = a$
 
 ### NOT
 
