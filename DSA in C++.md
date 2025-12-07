@@ -469,6 +469,8 @@ consecutive Fibonacci numbers.
 ### OR
 
 - The **or** operation `x | y` produces a number that has one bits in positions where at least one of x and y have one bits.
+- $A | A = A$
+- $ A | 0 = A$
 
 ### XOR
 
